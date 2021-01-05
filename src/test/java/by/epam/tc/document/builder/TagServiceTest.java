@@ -3,11 +3,11 @@ package by.epam.tc.document.builder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class TagTest extends Assertions {
+class TagServiceTest extends Assertions {
 
     @Test
     void findNextTagTest() {
-        Tag tag = Tag.findTag("<note>", 0);
+        Tag tag = TagService.findTag("<note>", 0);
         assertNotNull(tag);
         assertTrue(tag.isOpening());
         assertNotNull(tag.getRelatedNode());
@@ -15,7 +15,7 @@ class TagTest extends Assertions {
 
     @Test
     void findNextTagWithAttributesTest() {
-        Tag tag = Tag.findTag("<note attr=\"val\">", 0);
+        Tag tag = TagService.findTag("<note attr=\"val\">", 0);
         assertNotNull(tag);
         assertTrue(tag.isOpening());
         assertNotNull(tag.getRelatedNode());
@@ -23,7 +23,7 @@ class TagTest extends Assertions {
 
     @Test
     void findNextTagClosingTest() {
-        Tag tag = Tag.findTag("</note>", 0);
+        Tag tag = TagService.findTag("</note>", 0);
         assertNotNull(tag);
         assertFalse(tag.isOpening());
         assertNull(tag.getRelatedNode());
@@ -31,13 +31,13 @@ class TagTest extends Assertions {
 
     @Test
     void findNextTagMultilineTest() {
-        Tag tag = Tag.findTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<note>", 0);
+        Tag tag = TagService.findTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<note>", 0);
         assertNotNull(tag);
     }
 
     @Test
     void findNextTagStartPositionTest() {
-        Tag tag = Tag.findTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<note>", 0);
+        Tag tag = TagService.findTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<note>", 0);
         assertEquals(39, tag.getSelfStartPosition());
     }
 }

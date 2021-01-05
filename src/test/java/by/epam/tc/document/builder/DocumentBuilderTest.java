@@ -1,5 +1,6 @@
 package by.epam.tc.document.builder;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 class DocumentBuilderTest extends Assertions {
 
     @Test
+    @SneakyThrows
     void documentBuilderParseStringSimpleXMLTest() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><notes>" +
                 "<note>" +
@@ -29,7 +31,8 @@ class DocumentBuilderTest extends Assertions {
     }
 
     @Test
-    void documentBuilderParseFileTest() throws IOException {
+    @SneakyThrows
+    void documentBuilderParseFileTest() {
         File file = new File("example.xml");
         DocumentBuilder documentBuilder = new DocumentBuilder(file);
         System.out.println(documentBuilder.build().toString());
