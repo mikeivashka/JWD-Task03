@@ -47,7 +47,6 @@ class TagService {
 
     private static Map.Entry<String, String> parseSingleAttribute(String attribute) {
         String[] keyValue = attribute.split("=");
-        System.out.println(Arrays.toString(keyValue));
         keyValue[1] = keyValue[1].replace("\"", "").trim();
         return new AbstractMap.SimpleEntry<>(keyValue[0].trim(), keyValue[1]);
     }

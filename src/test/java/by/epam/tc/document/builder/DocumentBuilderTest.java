@@ -32,7 +32,7 @@ class DocumentBuilderTest extends Assertions {
     @Test
     @SneakyThrows
     void documentBuilderParseFileTest() {
-        File file = new File("example.xml");
+        File file = new File("src/main/resources/example.xml");
         DocumentBuilder documentBuilder = new DocumentBuilder(file);
         System.out.println(documentBuilder.build().toString());
     }
