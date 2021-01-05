@@ -1,4 +1,4 @@
-package by.epam.tc.document;
+package by.epam.tc.document.entity;
 
 import io.bretty.console.tree.PrintableTreeNode;
 import lombok.Getter;

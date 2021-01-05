@@ -1,6 +1,6 @@
 package by.epam.tc.document.builder;
 
-import by.epam.tc.document.Node;
+import by.epam.tc.document.entity.Node;
 import lombok.Data;
 
 import java.util.regex.Matcher;

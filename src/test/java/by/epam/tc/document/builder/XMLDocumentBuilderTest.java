@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-class DocumentBuilderTest extends Assertions {
+class XMLDocumentBuilderTest extends Assertions {
 
     @Test
     @SneakyThrows
@@ -25,7 +25,7 @@ class DocumentBuilderTest extends Assertions {
                 "<body>Wash your hands!</body>" +
                 "</note>" +
                 "</notes>";
-        DocumentBuilder documentBuilder = new DocumentBuilder(xml);
+        XMLDocumentBuilder documentBuilder = new XMLDocumentBuilder(xml);
         System.out.println(documentBuilder.build().toString());
     }
 
@@ -33,7 +33,7 @@ class DocumentBuilderTest extends Assertions {
     @SneakyThrows
     void documentBuilderParseFileTest() {
         File file = new File("src/main/resources/example.xml");
-        DocumentBuilder documentBuilder = new DocumentBuilder(file);
+        XMLDocumentBuilder documentBuilder = new XMLDocumentBuilder(file);
         System.out.println(documentBuilder.build().toString());
     }
 }

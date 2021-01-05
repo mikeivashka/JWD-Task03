@@ -1,59 +1,9 @@
 package by.epam.tc.document.builder;
 
-import by.epam.tc.document.Document;
+import by.epam.tc.document.entity.Document;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.stream.Collectors;
 
-public class DocumentBuilder {
-    private static final String TAG_NOT_FOUND_MESSAGE = "Invalid XML, couldn't find tag after pos:";
-    private final String xml;
-
-    public DocumentBuilder(String xml) {
-        this.xml = xml;
-    }
-
-    public DocumentBuilder(File file) throws IOException {
-        try (FileReader fileReader = new FileReader(file)) {
-            xml = new BufferedReader(fileReader).lines().collect(Collectors.joining());
-        } catch (IOException e) {
-            throw new IOException("Error occurred while opening XML file");
-        }
-    }
-
-    public Document build() throws ParseException {
-        Deque<Tag> stack = new ArrayDeque<>();
-        Tag currentTag = TagService.findTag(xml, 0);
-        if (currentTag == null) {
-            throw new ParseException(TAG_NOT_FOUND_MESSAGE, 0);
-        }
-        Document document = new Document(currentTag.getRelatedNode());
-        stack.add(currentTag);
-        int currentPosition = currentTag.endPosition();
-        while (!stack.isEmpty()) {
-            currentTag = TagService.findTag(xml, currentPosition);
-            if (currentTag == null) {
-                throw new ParseException(TAG_NOT_FOUND_MESSAGE, currentPosition);
-            }
-            currentPosition = currentTag.endPosition();
-            if (currentTag.isOpening()) {
-                assert stack.peek() != null;
-                stack.peek().getRelatedNode().addChildNode(currentTag.getRelatedNode());
-                stack.push(currentTag);
-            } else {
-                Tag openingTag = stack.pop();
-                if (!openingTag.getRelatedNode().hasChildNodes()) {
-                    openingTag.getRelatedNode()
-                            .setContent(xml.substring(openingTag.endPosition(), currentTag.getSelfStartPosition()));
-                }
-            }
-        }
-        return document;
-    }
+public interface DocumentBuilder {
+    Document build() throws ParseException;
 }
