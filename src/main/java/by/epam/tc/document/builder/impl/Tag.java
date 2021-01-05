@@ -1,4 +1,4 @@
-package by.epam.tc.document.builder;
+package by.epam.tc.document.builder.impl;
 
 import by.epam.tc.document.entity.Node;
 import lombok.Data;

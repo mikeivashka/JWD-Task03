@@ -1,5 +1,6 @@
-package by.epam.tc.document.builder;
+package by.epam.tc.document.builder.impl;
 
+import by.epam.tc.document.builder.DocumentBuilder;
 import by.epam.tc.document.entity.impl.XMLDocument;
 
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package by.epam.tc.document.builder;
+package by.epam.tc.document.builder.impl;
 
 import java.util.*;
 import java.util.regex.Matcher;

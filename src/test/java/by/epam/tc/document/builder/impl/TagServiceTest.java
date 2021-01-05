@@ -1,4 +1,4 @@
-package by.epam.tc.document.builder;
+package by.epam.tc.document.builder.impl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

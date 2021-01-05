@@ -1,5 +1,6 @@
-package by.epam.tc.document.builder;
+package by.epam.tc.document.builder.impl;
 
+import by.epam.tc.document.builder.impl.XMLDocumentBuilder;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
