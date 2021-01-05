@@ -15,17 +15,17 @@ class Tag {
     private Node relatedNode;
 
     public static Tag fromString(String xml) {
-        Tag result = new Tag();
-        result.self = xml;
+        Tag parsingResult = new Tag();
+        parsingResult.self = xml;
         Matcher matcher = Pattern.compile("<([\\w._-]+[^>]+)>").matcher(xml);
-        result.isOpening = matcher.matches();
-        if (result.isOpening) {
-            result.relatedNode = new Node();
-            result.relatedNode.setName(TagService.parseTagName(xml));
+        parsingResult.isOpening = matcher.matches();
+        if (parsingResult.isOpening) {
+            parsingResult.relatedNode = new Node();
+            parsingResult.relatedNode.setName(TagService.parseTagName(xml));
             TagService.parseAttributes(xml)
-                    .forEach((key, value) -> result.relatedNode.addAttribute(key, value));
+                    .forEach((key, value) -> parsingResult.relatedNode.addAttribute(key, value));
         }
-        return result;
+        return parsingResult;
     }
 
     public int endPosition() {
