@@ -23,7 +23,6 @@ public class Node implements PrintableTreeNode {
         return !childNodes.isEmpty();
     }
 
-
     public void addChildNode(Node child) {
         childNodes.add(child);
     }

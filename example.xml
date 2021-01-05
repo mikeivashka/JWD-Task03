@@ -3,7 +3,7 @@
         <name>Belgian Waffles</name>
         <price>$5.95</price>
     </food>
-    <food id="2">
+    <food  id = "2"  >
         <name>Strawberry Belgian Waffles</name>
         <price>$7.95</price>
     </food>

@@ -17,7 +17,7 @@ class Tag {
     public static Tag fromString(String xml) {
         Tag result = new Tag();
         result.self = xml;
-        Matcher matcher = Pattern.compile(RegEx.OPENING_TAG.content).matcher(xml);
+        Matcher matcher = Pattern.compile("<([\\w._-]+[^>]+)>").matcher(xml);
         result.isOpening = matcher.matches();
         if (result.isOpening) {
             result.relatedNode = new Node();

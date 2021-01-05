@@ -1,15 +1,13 @@
 package by.epam.tc.document.builder;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class TagService {
 
-    private TagService(){}
+    private TagService() {
+    }
 
     public static String parseTagName(String xml) {
         return xml.transform(s -> {
@@ -22,25 +20,34 @@ class TagService {
     public static Map<String, String> parseAttributes(String xml) {
         if (!xml.contains("=")) return Collections.emptyMap();
         Map<String, String> attributes = new HashMap<>();
-        Arrays.stream(xml.transform(s -> s
-                .substring(s.indexOf(' '), s.length() - 1)
-                .trim())
-                .split(" ")
-        )
+        splitTagIntoAttributes(xml)
                 .forEach(s -> {
-                    String[] keyValue = s.split("=");
-                    keyValue[1] = keyValue[1].transform(val -> val.substring(1, val.length() - 1));
-                    attributes.put(keyValue[0], keyValue[1]);
+                    Map.Entry<String, String> parsedAttributes = parseSingleAttribute(s);
+                    attributes.put(parsedAttributes.getKey(), parsedAttributes.getValue());
                 });
         return attributes;
     }
 
     public static Tag findTag(String xml, int beginIndex) {
-        Matcher matcher = Pattern.compile(RegEx.TAG.content).matcher(xml);
+        Matcher matcher = Pattern.compile("<([/]?[\\w._-]+[^>]+)>").matcher(xml);
         if (!matcher.find(beginIndex)) return null;
         String match = matcher.group();
         Tag nextTag = Tag.fromString(match);
         nextTag.setSelfStartPosition(matcher.start());
         return nextTag;
+    }
+
+    private static List<String> splitTagIntoAttributes(String xml) {
+        return Arrays.asList(xml.transform(s -> s
+                .substring(s.indexOf(' '), s.length() - 1)
+                .trim())
+                .replaceAll("[ +]?=[ ]+?[\"]", "=\"")
+                .split(" "));
+    }
+
+    private static Map.Entry<String, String> parseSingleAttribute(String attribute) {
+        String[] keyValue = attribute.split("=");
+        keyValue[1] = keyValue[1].replace("\"", "").trim();
+        return new AbstractMap.SimpleEntry<>(keyValue[0].trim(), keyValue[1]);
     }
 }
